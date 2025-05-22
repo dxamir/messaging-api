@@ -32,43 +32,33 @@ Docker & Docker Compose
 Node.js (v16+) & npm/yarn
 
 vm.max_map_count ≥ 262144 (Linux/macOS)
-
-bash
-Copy
-Edit
 sudo sysctl -w vm.max_map_count=262144
+
 Clone & Install
-bash
-Copy
-Edit
+
 git clone https://github.com/your-org/messaging-service.git
 cd messaging-service
 npm install
+
 Environment Variables
 Create .env with:
 
 env
-Copy
-Edit
+
 KAFKA_BROKER=localhost:9092
 KAFKA_CONSUMER_GROUP=message-indexer
 KAFKA_TOPIC=message_created
 MONGODB_URI=mongodb://localhost:27017/messaging
 ELASTICSEARCH_NODE=http://localhost:9200
 Run Services
-bash
-Copy
-Edit
+
 docker-compose up -d
 Start Application
-bash
-Copy
-Edit
+
 npm run start:dev
 Architecture Overview
 mermaid
-Copy
-Edit
+
 flowchart LR
   A[Client/API] --> B[MongoDB]
   B -->|Publish message| C[Kafka Topic: message_created]
@@ -85,17 +75,13 @@ Kafka consumer indexes messages to Elasticsearch for search
 Search queries hit Elasticsearch for fast, scalable results
 
 MongoDB Indexes
-js
-Copy
-Edit
+
 db.messages.createIndex({ conversationId: 1, timestamp: -1 });
 db.messages.createIndex({ content: "text" });
 Testing
 Run unit and integration tests with:
 
-bash
-Copy
-Edit
+
 npm run test
 Security & Validation
 Input sanitization with sanitize-html
