@@ -35,8 +35,8 @@ sudo sysctl -w vm.max_map_count=262144
 
 ### Clone & Install
 
-git clone https://github.com/your-org/messaging-service.git
-cd messaging-service
+git clone https://github.com/dxamir/messaging-api.git
+cd messaging-api
 npm install
 
 ### Environment Variables
@@ -50,7 +50,13 @@ KAFKA_TOPIC=message_created
 MONGODB_URI=mongodb://localhost:27017/messaging
 ELASTICSEARCH_NODE=http://localhost:9200``
 
+sample env is added to the repo
+
 ### Run Services
+
+- MongoDB 
+- Kafka
+- Elastic Search
 
 `docker-compose up -d`
 
@@ -63,13 +69,15 @@ ELASTICSEARCH_NODE=http://localhost:9200``
 
      [ Client/API]
       --> [MongoDB]
-     --> |Publish message|
-     --> Kafka Topic: message_created]
-     --> [Kafka Consumer (NestJS)]
-     --> [Elasticsearch Indexing]
+      --> |Publish message|
+      --> Kafka Topic: message_created]
+      --> [Kafka Consumer (NestJS)]
+      --> [Elasticsearch Indexing]
      --> [Full-text Search|
+     <--
 
 ## Usage
+
 - Messages saved via API are stored in MongoDB
 - Kafka publishes message creation events
 - Kafka consumer indexes messages to Elasticsearch for search
