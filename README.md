@@ -1,7 +1,7 @@
-#Messaging Microservice
+## Messaging Microservice
 A scalable messaging microservice built with NestJS, MongoDB, Kafka, and Elasticsearch for real-time message ingestion, indexing, and full-text search.
 
-##Features
+## Features
 - Persist messages in MongoDB with optimized indexes
 
 - Publish message events to Kafka for asynchronous processing
@@ -14,7 +14,7 @@ A scalable messaging microservice built with NestJS, MongoDB, Kafka, and Elastic
 
 - Follows SOLID principles and clean architecture patterns
 
-##Tech Stack
+## Tech Stack
 - Backend: NestJS (TypeScript)
 
 - Database: MongoDB
@@ -25,22 +25,21 @@ A scalable messaging microservice built with NestJS, MongoDB, Kafka, and Elastic
 
 - Containerization: Docker, Docker Compose
 
-##Getting Started
-###Prerequisites
-Docker & Docker Compose
-
-Node.js (v16+) & npm/yarn
+## Getting Started
+### Prerequisites
+- Docker & Docker Compose
+- Node.js (v16+) & npm/yarn
 
 vm.max_map_count ≥ 262144 (Linux/macOS)
 sudo sysctl -w vm.max_map_count=262144
 
-###Clone & Install
+### Clone & Install
 
 git clone https://github.com/your-org/messaging-service.git
 cd messaging-service
 npm install
 
-###Environment Variables
+### Environment Variables
 Create .env with:
 
 `env
@@ -51,16 +50,15 @@ KAFKA_TOPIC=message_created
 MONGODB_URI=mongodb://localhost:27017/messaging
 ELASTICSEARCH_NODE=http://localhost:9200``
 
-###Run Services
+### Run Services
 
 `docker-compose up -d`
 
-###Start Application
+### Start Application
 
 `npm run start:dev`
 
-
-##Architecture Overview
+## Architecture Overview
  
 
      [ Client/API]
@@ -71,39 +69,36 @@ ELASTICSEARCH_NODE=http://localhost:9200``
      --> [Elasticsearch Indexing]
      --> [Full-text Search|
 
-##Usage
+## Usage
 - Messages saved via API are stored in MongoDB
-
 - Kafka publishes message creation events
-
 - Kafka consumer indexes messages to Elasticsearch for search
-
 - Search queries hit Elasticsearch for fast, scalable results
 
-####MongoDB Indexes
+#### MongoDB Indexes
 
 ```javascript
 db.messages.createIndex({ conversationId: 1, timestamp: -1 });
 db.messages.createIndex({ content: "text" });
 ```
-##Testing
+## Testing
 Run unit and integration tests with:
 
 
 ```shell
 npm run test
-Security & Validation
-Input sanitization with sanitize-html
 ```
+## Security & Validation
 
-Basic authentication can be added as needed
+- Input sanitization with sanitize-html
+- Basic authentication can be added as needed
+- Secure Kafka & Elasticsearch in production environments
 
-Secure Kafka & Elasticsearch in production environments
-
-##Troubleshooting
+## Troubleshooting
 - Ensure Elasticsearch vm.max_map_count is set properly
-
 - Start Zookeeper before Kafka
-
-- Check container logs with docker-compose logs [service]
+- Check container logs with
+  ```shell
+  docker-compose logs [service]
+  ```
 
